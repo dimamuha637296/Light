@@ -1,0 +1,1451 @@
+@import "_base";
+@import "_values";
+@import "_mixins";
+@import "_container";
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+
+body {
+	margin: 0 auto;
+	padding-top: 165px;
+	font-family: $font1;
+}
+
+button,
+form *,
+input {
+	outline: none;
+}
+
+a::before,
+a::after,
+button::before,
+button::after {
+	$tranz: all 0.3s;
+	@include transition($tranz);
+}
+
+.pageTitle {
+	@include font(50px, 60px, #1f1f1f, bold, null);
+	margin-bottom: 40px;
+}
+
+.subTitle {
+	@include font(16px, 22px, $textColor2, normal, null);
+	margin-bottom: 30px;
+}
+
+.text {
+	font-family: $font2;
+	@include font(16px, 22px, $textColor4, normal, null);
+}
+
+.textContainer {
+	width: calc(100% - 170px);
+	margin: 0 auto;
+}
+
+header {
+	border-bottom: 1px solid $color6;
+	margin-bottom: 70px;
+	position: fixed;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	background-color: $color1;
+	z-index: 2;
+}
+
+.headerContent {
+	@include flex;
+	@include justify-content(space-between);
+	height: 95px;
+	position: relative;
+
+	.logo {
+		@include flex;
+		@include justify-content(center);
+		@include align-items(center);
+		@include invisLink;
+		width: 160px;
+		background-color: $color3;
+		$trans: all 0.3s;
+		@include transition($trans);
+
+		&:hover {
+			opacity: 0.8;
+		}
+
+		img {
+			display: block;
+			width: 105px;
+			height: 45px;
+		}
+	}
+
+	.modMenu {
+		width: calc(100% - 160px);
+		@include flex;
+		@include justify-content(space-between);
+	}
+
+	.menu {
+		@include flex;
+		@include justify-content(space-between);
+		width: 745px;
+		padding: 0 15px;
+
+		li {
+			width: calc(100% / 5);
+			border-bottom: 3px solid #fff;
+			$tranz: all 0.3s;
+			@include transition($tranz);
+
+			&:hover {
+				border-bottom: 3px solid $color7;
+				$tranz: all 0.3s;
+				@include transition($tranz);
+			}
+
+			a {
+				display: block;
+				font-family: $font2;
+				@include font(15px, 95px, $textColor7, normal, null);
+				text-align: center;
+				$tranz: all 0.3s;
+				@include transition($tranz);
+
+				&:hover {
+					color: $textColor4;
+				}
+			}
+
+			.subMenu {
+				background: $color1;
+				$tranz: all 0.3s;
+				@include transition($tranz);
+				border: 1px solid $color5;
+				a {
+					line-height: 50px;
+					&:hover {
+						color: $textColor5;
+					}
+				}
+
+				&.onMD {
+					visibility: hidden;
+					opacity: 0;
+				}
+			}
+
+			&:hover .subMenu.onMD {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+	}
+
+	.contacts {
+		@include flex;
+		@include justify-content(center);
+		@include flex-direction(column);
+		width: 240px;
+		background-color: $color5;
+
+		.tel {
+			display: block;
+			width: fit-content;
+			margin: 0 auto 10px;
+			font-size: 20px;
+			line-height: 1;
+			color: $textColor6;
+			$tranz: all 0.3s;
+			@include transition($tranz);
+			
+			&:hover {
+				opacity: 0.8;
+			}
+
+			.icon-tel {
+				display: none;
+			}
+		}
+
+		.feedbackBtn {
+			@include flex;
+			@include justify-content(space-between);
+			@include align-items(center);
+			margin: 0 auto;
+			background-color: transparent;
+			border: none;
+			
+			span {
+				$tranz: all 0.3s;
+				@include transition($tranz);
+			}
+
+			.icon-telephone {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				margin-right: 10px;
+				background-color: $color3;
+				font-size: 15px;
+				color: #4f482a;
+			}
+
+			.feedbackBtnText {
+				font-family: $font2;
+				@include font(15px, 1, $textColor10, bold, null);
+				border-bottom: 1px dotted $textColor6;
+				$tranz: all 0.3s;
+				@include transition($tranz);
+			}
+
+			&:hover {
+				span {
+					opacity: 0.8;
+				}
+				.feedbackBtnText {
+					border-bottom: 1px dotted transparent;
+				}
+			}
+		}
+	}
+}
+
+.hamburger {
+	display: none;
+}
+
+.breadcrumps {
+	margin-bottom: 35px;
+
+	a,
+	span {
+		display: inline-block;
+		@include font(14px, 1, null, 300, null);
+	}
+
+	a {
+		margin-right: 15px;
+		position: relative;
+		color: $textColor5;
+		$tranz: all 0.3s;
+		@include transition($tranz);
+
+		&:hover {
+			color: $textColor3;
+		}
+
+		&::after {
+			content: "";
+			display: block;
+			width: 5px;
+			height: 5px;
+			background-color: $textColor3;
+			position: absolute;
+			top: 6px;
+			right: -13px;
+			$trans: rotate(45deg);
+			@include transform($trans);
+		}
+
+		&:last-of-type {
+			&::after {
+				background-color: $textColor5;
+			}
+		}
+	}
+
+	span {
+		color: $textColor3;
+	}
+}
+
+.slider {
+	margin-top: 70px;
+	margin-bottom: 100px;
+}
+
+.sliderItems {
+	max-width: 1615px;
+	margin: 0 auto;
+
+}
+
+.sliderItem {
+	width: 600px;
+	height: 300px;
+	$tranz: all 0.5s;
+	@include transition($tranz);
+	position: relative;
+	top: 50px;
+
+	.sliderItemImg {
+		// width: 100%;
+		// height: 100%;
+		width: 600px;
+		height: 300px;
+		@include back-img(cover, center, no-repeat);
+		margin: 0 auto;
+		@include box-shadow(inset 0 400px 0 0 rgba(0, 0, 0, 0.8));
+		$tranz: all 0.5s;
+		@include transition($tranz);
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		@include invisLink;
+		z-index: 0;
+		&::before {
+			content: '';
+			position: absolute;
+			left: 175px;
+			bottom: -1px;
+			width: 0;
+			height: 0;
+			border-bottom: 50px solid $color1;
+			border-left: 50px solid transparent;
+			border-right: 50px solid transparent;
+			opacity: 0;
+			$tranz: all 0.5s;
+			@include transition($tranz);
+			
+		}
+	}
+	.sliderItemTextBlock {
+		width: 300px;
+		padding: 30px 65px 30px 40px;
+		background-color: $color3;
+		opacity: 0;
+		$tranz: all 1s;
+		@include transition($tranz);
+		position: absolute;
+		left: 175px;
+		bottom: 50px;
+	}
+	.sliderItemTextBlockText {
+		font-family: $font2;
+		@include font(15px, 20px, $color2, bold, null);
+	}
+}
+
+.slick-center.slick-current {
+	&.sliderItem {
+		z-index: 1;
+		// width: 800px;
+		// height: 400px;
+		top: 0px;
+		.sliderItemImg {
+			width: 800px;
+			height: 400px;
+			left: -100px;
+			bottom: -50px;
+			// transform: scale(1.3);
+			@include box-shadow(inset 0 400px 0 0 rgba(0, 0, 0, 0));
+			&::before {
+				opacity: 1;
+			}
+		}
+		.sliderItemTextBlock {
+			opacity: 1;
+		}
+	}
+}
+
+.slick-dots {
+	@include flex;
+	@include justify-content(center);
+	li {
+		& + li {
+			margin-left: 18px;
+		}
+		button {
+			position: relative;
+			padding: 0;;
+			font-size: 0;
+			line-height: 0;
+			background-color: transparent;
+			border: none;
+			&::before {
+				content: '';
+				display: block;
+				width: 12px;
+				height: 12px;
+				border: 1px solid #d1d1d1;
+				border-radius: 50%;
+				background: transparent;
+			}
+		}
+	}
+
+	li.slick-active{
+		button {
+			&::before {
+				border: none;
+				background: $color4;
+			}
+		}
+	}
+}
+
+.slick-arrow {
+	border: none;
+	background-color: transparent;
+	font-size: 0;
+	line-height: 0;
+	position: absolute;
+	top: calc((100% - 75px)/2);
+	z-index: 1;
+	&::before {
+		content: '';
+		display: block;
+		width: 26px;
+		height: 26px;
+		border-left: 2px solid $color4;
+		border-bottom: 2px solid $color4;
+	}
+	&.slick-prev {
+		left: 335px;
+		&::before {
+			$trans: rotate(45deg);
+			@include transform($trans);
+		}
+	}
+	&.slick-next {
+		right: 335px;
+		&::before {
+			$trans: rotate(225deg);
+			@include transform($trans);
+		}
+	}
+}
+
+.slick-track {
+	height: 435px;
+	position: relative;
+}
+
+.news {
+	margin-top: 75px;
+	margin-bottom: 75px;
+}
+
+.newsItems {
+	@include flex;
+	@include justify-content(space-between);
+
+	& + & {
+		margin-top: 10px;
+	}
+}
+
+.newsItem {
+	@include invisLink;
+	@include flex;
+	@include align-items(center);
+	width: 382px;
+	height: 280px;
+	padding: 0 40px;
+	position: relative;
+
+	img {
+		width: 382px;
+		height: 280px;
+		object-fit: cover;
+	}
+}
+
+a:hover +.newsBack {
+	@include box-shadow(inset 0 400px 0 0 rgba(0, 0, 0, 0.3));
+}
+
+.newsBack {
+	@include back-img(cover, center, no-repeat);
+	position: absolute;
+	width: 100%;
+	height: 280px;
+	left: 0;
+	top: 0;
+	z-index: -1;
+	@include box-shadow(inset 0 400px 0 0 rgba(0, 0, 0, 0.7));
+	$trans: all 0.3s;
+	@include transition($trans);
+}
+
+.newsText {
+	@include font(18px, 26px, $textColor1, bold, null);
+}
+
+.newsDate {
+	@include font(14px, 26px, $color3, 300, null);
+}
+
+.allNewsButton {
+	display: block;
+	position: relative;
+	margin: 40px auto;
+	background: transparent;
+	font-family: $font1;
+	@include font(15px, 22px, #1d1d1d, normal, null);
+	text-transform: uppercase;
+	
+	span {
+		$tranz: all 0.3s;
+		@include transition($tranz);
+	}
+	&:hover span + span {
+		color: $textColor5;
+	}
+	&:hover span:first-child {
+		$trans: rotate(-90deg);
+		@include transform($trans);
+	}
+
+	&.active:hover span:first-child {
+		$trans: rotate(90deg);
+		@include transform($trans);
+	}
+
+	span[class*="icon"] {
+		font-size: 10px;
+		margin-right: 15px;
+		$trans: translateX(0px);
+		@include transform($trans);
+		display: inline-block;
+	}
+}
+
+footer {
+	height: 120px;
+	border-top: 3px solid $color4;
+	padding-top: 20px;
+}
+
+.footerContent {
+	@include flex;
+	@include justify-content(space-between);
+}
+
+.footerLogo {
+	@include invisLink;
+
+	img {
+		$tranz: all 0.3s;
+		@include transition($tranz);
+	}
+
+	a:hover+img {
+		opacity: 0.8;
+	}
+}
+
+.footerLogoImg {
+	display: block;
+	width: 128px;
+	height: 57px;
+	margin: 0 auto 15px;
+}
+
+.footerLogoText {
+	font-family: $font2;
+	@include font(14px, null, $textColor2, 300, null);
+
+	a {
+		$tranz: all 0.3s;
+		@include transition($tranz);
+
+		&:hover {
+			color: $textColor5;
+		}
+	}
+}
+
+.footerRight {
+	p {
+		font-family: $font2;
+		@include font(17px, 30px, #3a3a3a, 300, null);
+		text-align: right;
+
+		a {
+			display: inline-block;
+			padding: 0 7px;
+			border-radius: 2px;
+			background-color: $color8;
+			color: $textColor9;
+			text-decoration: underline;
+			$tranz: all 0.3s;
+			@include transition($tranz);
+
+			&:hover {
+				color: $textColor1;
+				text-decoration-color: transparent;
+			}
+		}
+	}
+}
+
+.footerMenu {
+	@include flex;
+	@include justify-content(space-between);
+	width: 745px;
+	margin-bottom: 15px;
+
+	li {
+		width: fit-content;
+
+		a {
+			display: block;
+			font-family: $font2;
+			@include font(17px, 45px, #3a3a3a, normal, null);
+			text-align: center;
+			$tranz: all 0.3s;
+			@include transition($tranz);
+
+			&:hover {
+				color: $textColor5;
+			}
+		}
+	}
+}
+// -----------------------------------------------------------------------------
+.overlay {
+    width: 100%;
+    height: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background-color: transparent;
+    -webkit-transition-duration: .4s, 0s;
+    transition-duration: .4s, 0s;
+    -webkit-transition-property: background-color, height;
+    transition-property: background-color, height;
+    -webkit-transition-delay: 0s, .4s;
+    transition-delay: 0s, .4s;
+    -webkit-transition-timing-function: ease-in-out, ease;
+    transition-timing-function: ease-in-out, ease;
+}
+.darkness {
+	overflow: hidden;
+	
+	.overlay {
+		height: 100%;
+		background-color: rgba(255, 255, 255, .7);
+		-webkit-transition-delay: 0s;
+		transition-delay: 0s;
+	}
+}
+
+.modal {
+    position: fixed;
+    z-index: 4;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+    -webkit-transition-property: opacity, -webkit-transform;
+    transition-property: opacity, -webkit-transform;
+    transition-property: transform, opacity;
+    transition-property: transform, opacity, -webkit-transform;
+    -webkit-transition-duration: .2s, .16s;
+    transition-duration: .2s, .16s;
+    -webkit-transition-timing-function: cubic-bezier(.33, .74, .5, 1.44), ease-in-out;
+    transition-timing-function: cubic-bezier(.33, .74, .5, 1.44), ease-in-out;
+}
+
+.modal-close {
+    $trans: rotate(45deg);
+    @include transform($trans);
+    position: absolute;
+    top: -47px;
+    right: -49px;
+    width: 90px;
+	height: 90px;
+	border: none;
+	background-color: $color3;
+}
+
+.modal.open {
+	opacity: 1;
+	$trans: translate(-50%, -50%) scale(1);
+    @include transform($trans);
+}
+
+.modalFeedback {
+	width: 100%;
+    max-width: 500px;
+	background-color: #fff;
+	border: 3px solid $color3;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+	$trans: translate(-50%, -50%) scale(0);
+    @include transform($trans);
+	padding: 70px 50px;
+	
+	& > div + div {
+		margin-top: 30px;
+	}
+	.icon-close {
+		display: block;
+		font-size: 24px;
+		color: #171613;
+		$trans: rotate(45deg);
+    	@include transform($trans);
+	}
+
+	input:not([type="submit"]),
+	textarea {
+		width: 100%;
+		border: 1px solid #d0d0d0;
+		padding: 0px 10px 0px 30px;
+		background-color: #f5f5f5;
+		@include font(16px, 43px, $color2, normal, null);
+		&:placeholder {
+			font-weight: bold;
+			color: #d0d0d0;
+		}
+	}
+
+	input:not([type="submit"]) {
+		height: 45px;
+	}
+
+	textarea {
+		padding: 13px 10px 13px 30px;
+		height: 135px;
+		resize: none;
+		line-height: 1.3;
+	}
+
+	input[type="submit"] {
+		width: 100%;
+		height: 64px;
+		background-color: $color3;
+		$shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.35);
+		@include box-shadow($shadow);
+		@include font(16px, 64px, #2d2c2c, bold, null);
+		  
+	}
+
+	.rooms {
+		@include flex;
+		@include justify-content(flex-start);
+		@include align-items(center);
+		span {
+			display: inline-block;
+			margin-right: 30px;
+			@include font(16px, 23px, $textColor2, bold, null);
+		}
+	}
+
+	.roomsItems {
+		@include flex;
+		@include justify-content(flex-start);
+
+		div + div {
+			margin-left: 12px;
+		}
+
+		label {
+			display: block;
+			position: relative;
+			width: 23px;
+			height: 23px;
+			border: 1px solid #d0d0d0;
+			background-color: transparent;
+			@include font(16px, 21px, #d0d0d0, normal, null);
+		}
+		
+		input[type="radio"] {
+			display: none;
+		}
+
+		input[type="radio"]:checked + label {
+			border: none;
+			background-color: $color3;
+			color: $textColor2;
+			line-height: 23px;
+		}
+
+		input[type="radio"] + label {
+			cursor: pointer;
+		}
+	}
+}
+
+// --------------------------------------------------------------
+
+@media (max-width: 1680px) {
+	.slider {
+		margin-top: 40px;
+    	margin-bottom: 45px;
+	}
+
+	.sliderItems {
+		max-width: 1150px;
+		margin: 0 auto;
+	
+	}
+
+	.sliderItem {
+		width: 400px;
+		height: 200px;
+
+		.sliderItemImg {
+			width: 400px;
+			height: 200px;
+		}
+		.sliderItemTextBlock {
+			padding: 25px 30px 25px 25px;
+			left: 65px;
+		}
+	}
+
+	.slick-center.slick-current {
+		&.sliderItem {
+			z-index: 1;
+			// width: 600px;
+			// height: 300px;
+			top: 0px;
+
+			.sliderItemImg {
+				width: 600px;
+				height: 300px;
+				left: -100px;
+				bottom: -50px;
+				&::before {
+					left: 75px;
+				}
+			}
+		}
+	}
+
+	.slick-track {
+		height: 335px;
+	}
+
+	.slick-arrow {
+		&.slick-prev {
+			left: 215px;
+		}
+		&.slick-next {
+			right: 215px;
+		}
+	}
+}
+
+// 1199-992
+@media (max-width: $maxMediaMD) {
+	body {
+		padding-top: 110px;
+	}
+
+	.headerContent {
+		height: 75px;
+
+		.logo {
+			width: 130px;
+		}
+
+		.modMenu {
+			width: calc(100% - 130px);
+		}
+
+		.contacts {
+			width: 190px;
+
+			.tel {
+				font-size: 17px;
+			}
+		}
+
+		.menu {
+			width: calc(100% - 190px);
+
+			li {
+				a {
+					line-height: 75px;
+				}
+			}
+		}
+	}
+
+	.newsItem {
+		width: 315px;
+		height: 230px;
+	}
+
+	.newsBack {
+		height: 230px;
+	}
+
+	.slider {
+		margin-top: 40px;
+    	margin-bottom: 45px;
+	}
+
+	.sliderItems {
+		max-width: 940px;
+		margin: 0 auto;
+	
+	}
+
+	.sliderItem {
+		width: 300px;
+		height: 150px;
+		top: 40px;
+
+		.sliderItemImg {
+			width: 300px;
+			height: 150px;
+			&::before {
+				left: 50px;
+				border-bottom: 21px solid $color1;
+				border-left: 15px solid transparent;
+				border-right: 15px solid transparent;
+			}
+		}
+		.sliderItemTextBlock {
+			padding: 10px 15px 10px 15px;
+			left: 30px;
+    		bottom: 21px;
+		}
+	}
+
+	.slick-center.slick-current {
+		&.sliderItem {
+			z-index: 1;
+			// width: 450px;
+			// height: 225px;
+			top: 37px;
+			.sliderItemImg {
+				width: 450px;
+				height: 225px;
+				left: -75px;
+				top: -37px
+			}
+		}
+	}
+
+	.slick-track {
+		height: 240px;
+	}
+
+	.slick-arrow {
+		top: 100px;
+		&.slick-prev {
+			left: 170px;
+		}
+		&.slick-next {
+			right: 170px;
+		}
+	}
+}
+
+//991-768
+@media (max-width: $maxMediaSM) {
+	.noSM {
+		display: none;
+	}
+
+	.pageTitle {
+		font-size: 30px;
+		line-height: 35px;
+		margin-bottom: 20px;
+	}
+
+	.subTitle {
+		margin-bottom: 15px;
+	}
+
+	.hamburger {
+		cursor: pointer;
+		position: relative;
+		display: block;
+		border: 0;
+		z-index: 11;
+		background: transparent;
+		width: 35px;
+		height: 40px;
+		padding: 0;
+		order: 3;
+
+		span {
+			display: block;
+			width: 100%;
+			height: 3px;
+			background-color: $color2;
+			@include transition(all 0.2s);
+			margin: 0 auto;
+
+			&+span {
+				margin-top: 6px;
+			}
+		}
+
+		&.selected {
+			span {
+				&:nth-child(1) {
+					@include transform(rotate(45deg));
+				}
+
+				&:nth-child(2) {
+					opacity: 0;
+				}
+
+				&:nth-child(3) {
+					@include transform(rotate(-45deg));
+					margin-top: -12px;
+				}
+			}
+		}
+	}
+
+	header {
+		background-color: $color3;
+		z-index: 3;
+	}
+
+	.headerContent {
+		@include align-items(center);
+
+		.modMenu {
+			margin: 0;
+			display: block;
+			position: fixed;
+			right: 0px;
+			top: 75px;
+			// height: calc(100% - 81px);
+			width: 250px;
+			height: calc(100vh - 75px);
+			z-index: 2;
+			transform: translateX(100%);
+			@include transition(all 0.5s);
+
+			&.active {
+				transform: translateX(0%);
+			}
+		}
+
+		.menu {
+			display: block;
+			width: 100%;
+			height: calc(100% - 113px);
+			padding: 25px 20px 40px;
+			background: $color1;
+			overflow: auto;
+
+			li {
+				width: 100%;
+				border: none;
+
+				&:hover {
+					border: none;
+				}
+				a {
+					@include font(14px, 45px, null, null, null);
+				}
+				.subMenuLink {
+					background: $color9;
+					border: 1px solid #f2e9c2;
+					position: relative;
+
+					&::before {
+						content: '';
+						display: block;
+						position: absolute;
+						right: 25px;
+						top: 16px;
+						width: 7px;
+						height: 7px;
+						border-left: 1px solid $color2;
+						border-bottom: 1px solid $color2;
+						$tranz: all 0.3s;
+						@include transition($tranz);
+						$trans: rotate(-45deg);
+						@include transform($trans);
+					}
+					&.active::before {
+						top: 22px;
+						$trans: rotate(135deg);
+						@include transform($trans);
+					}
+				}
+				.subMenu {
+					display: none;
+					background: $color9;
+					border: 1px solid #f2e9c2;
+				}				
+			}
+		}
+
+		.contacts {
+			width: 100%;
+			border-top: 3px solid #bababa;
+			background: transparent;
+			.tel {
+				@include flex;
+				@include justify-content(center);
+				@include align-items(center);
+				width: 100%;
+				margin: 0;
+				background: $color5;
+				line-height: 65px;
+				.icon-tel {
+					display: inline-block;
+					width: 15px;
+					height: 26px;
+					margin-right: 20px;
+					background-image: url(../../build/img/telImg.png);
+				}
+			}
+			.feedbackBtn {
+				@include justify-content(center);
+				width: 100%;
+				height: 45px;
+				background: $color4;;
+				.icon-telephone {
+					background-color: transparent;
+					font-size: 20px;
+				}
+				.feedbackBtnText {
+					border-bottom: none;
+					font-family: $font2;
+					@include font(15px, null, null, bold, null);
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+
+	.textContainer {
+		width: calc(100% - 90px);
+	}
+
+	.sliderItems {
+		max-width: 760px;
+	}
+
+	.slick-arrow {
+		&.slick-prev {
+			left: 100px;
+		}
+		&.slick-next {
+			right: 100px;
+		}
+	}
+
+	.newsItem {
+		width: 243px;
+		height: 195px;
+	}
+
+	.newsBack {
+		height: 195px;
+	}
+
+	.newsText {
+		@include font(16px, 22px, null, null, null);
+	}
+
+	footer {
+		height: auto;
+		padding-bottom: 20px;
+	}
+
+	.footerContent {
+		display: block;
+	}
+
+	.footerMenu {
+		width: auto;
+		margin-bottom: 10px;
+	}
+
+	.footerLogoText {
+		text-align: center;
+	}
+
+	.footerRight {
+		p {
+			text-align: center;
+		}
+	}
+
+	.darkness {
+		overflow: hidden;
+		
+		.overlay {
+			background-color: rgba(0, 0, 0, .7);
+		}
+	}
+
+	.modal-close {
+		top: -32px;
+		right: -33px;
+		width: 60px;
+		height: 60px;
+	}
+
+	.modalFeedback {
+		padding: 55px 45px;
+		
+		& > div + div {
+			margin-top: 25px;
+		}
+		
+		input[type="submit"] {
+			height: 55px;
+			line-height: 55px;
+		}
+
+		textarea {
+			height: 105px;
+		}
+	}
+}
+
+//767-480
+@media (max-width: $maxMediaXS) {
+	.pageTitle {
+		font-size: 30px;
+    	line-height: 35px;
+    	margin-bottom: 15px;
+	}
+
+	.subTitle {
+		margin-bottom: 10px;
+	}
+
+	.breadcrumps {
+		a, span {
+			font-size: 15px;
+		}
+	}
+	
+	.textContainer {
+		width: 100%;
+	}
+
+	.slider {
+		margin-bottom: 25px;
+	}
+
+	.sliderItem {
+		top: 25px;
+	}
+
+	.slick-center.slick-current {
+		&.sliderItem {
+			.sliderItemImg {
+				width: 390px;
+				height: 195px;
+				left: -45px;
+				top: -35px;
+			}
+		}
+	}
+
+	.slick-track {
+		height: 215px;
+	}
+
+	.slick-arrow {
+		top: 85px;
+		&.slick-prev {
+			left: calc(50% - 230px);
+		}
+		&.slick-next {
+			right: calc(50% - 230px);
+		}
+	}
+
+	.news {
+		margin-top: 55px;
+	}
+
+	.newsItems {
+		display: block;
+	}
+
+	.newsItem {
+		width: 400px;
+    	height: 285px;
+		margin: 0 auto;
+		& + & {
+			margin-top: 15px;
+		}
+	}
+
+	.newsBack {
+		height: 285px;
+	}
+
+	.newsText {
+		font-size: 20px;
+    	line-height: 26px;
+	}
+
+	.allNewsButton {
+		margin: 30px auto;
+	}
+
+	.footerMenu {
+		width: auto;
+	}
+
+	.footerRight {
+		p {
+			font-size: 15px;
+		}
+	}
+
+	.modalFeedback {
+		max-width: 400px;
+		padding: 45px 30px;
+
+		.icon-close {
+			font-size: 18px;
+		}
+
+		input:not([type="submit"]), 
+		textarea {
+			padding: 0px 10px 0px 15px;
+		}
+
+		textarea {
+			padding-top: 12px;
+		}
+	}
+
+	.modal-close {
+		top: -27px;
+		right: -27px;
+		width: 50px;
+		height: 50px;
+	}
+}
+
+//479-320
+@media (max-width: $maxMediaXSS) {
+
+	.pageTitle {
+		font-size: 24px;
+    	line-height: 30px;
+	}
+
+	.sliderItem {
+		// display: none;
+		width: 270px;
+		height: 130px;
+		top: 10px;
+		.sliderItemImg {
+			width: 270px;
+			height: 130px;
+		}
+		.sliderItemTextBlock {
+			width: 100%;
+			left: 0px;
+			bottom: 0px;
+		}
+	}
+
+	.slick-center.slick-current {
+		&.sliderItem {
+			top: 0px;
+			.sliderItemImg {
+				width: 300px;
+				height: 150px;
+				left: -15px;
+				top: 0px;
+			}
+		}
+	}
+
+	.slick-track {
+		height: 165px;
+	}
+
+	.newsItem {
+		width: 290px;
+		height: 210px;
+		padding: 0 25px;
+	}
+
+	.newsText {
+		font-size: 18px;
+    	line-height: 24px;
+	}
+
+	.newsBack {
+		height: 210px;
+	}
+	
+	.footerMenu {
+		display: block;
+
+		li {
+			margin: 0 auto;
+			
+			a {
+				line-height: 30px;
+			}
+		}
+	}
+
+	.modalFeedback {
+		max-width: 300px;
+		padding: 20px 20px;
+
+		& > div + div {
+			margin-top: 15px;
+		}
+
+		.icon-close {
+			font-size: 18px;
+		}
+
+		input:not([type="submit"]), 
+		textarea {
+			padding: 0px 10px 0px 15px;
+			font-size: 14px;
+			line-height: 35px;
+		}
+
+		input:not([type="submit"]) {
+			height: 35px;
+		}
+
+		input[type="submit"] {
+			height: 45px;
+			font-size: 14px;
+			line-height: 45px;
+		}
+
+		textarea {
+			height: 70px;
+		}
+
+		.rooms {
+			span {
+				font-size: 13px;
+			}
+		}
+	}
+
+	.modal-close {
+		top: -19px;
+		right: -6px;
+		width: 35px;
+		height: 35px;
+	}
+}
